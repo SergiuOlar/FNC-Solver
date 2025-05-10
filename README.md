@@ -92,7 +92,7 @@ După alegerea modului de input, vei selecta solver-ul:
 1. **Davis, M. & Putnam, H.** (1960). *A Computing Procedure for Quantification Theory*.  
    ↳ [ACM DL](https://dl.acm.org/doi/10.1145/367177.367199) / [Wikipedia](https://en.wikipedia.org/wiki/Davis–Putnam_algorithm)  
 2. **Davis, M., Logemann, G. & Loveland, D.** (1962). *A Machine Program for Theorem‐Proving*.  
-   ↳ [ACM DL](https://dl.acm.org/doi/10.1145/367273.367279) / [Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm)   
+   ↳ [ACM DL](https://dl.acm.org/doi/10.1145/368273.368557) / [Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm)   
 3. **DIMACS CNF Challenge** – formate & benchmark-uri  
    ↳ [SATLIB @ UBC](https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html)  
 4. **SAT Competition** – competiții anuale  

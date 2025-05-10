@@ -1,67 +1,97 @@
 from typing import Set, FrozenSet
 from masurare_performanta import timp_si_memorie  # decorator care masoara timpul si memoria
 
+def alege_variabila(clauze: Set[FrozenSet[int]]) -> int:
+    """
+    Pentru fiecare variabila v, calculam de cate ori apare v si -v.
+    Returneaza variabila cu frecventa totala maxima.
+    """
+    frecvente = {}
+    for cl in clauze:
+        for lit in cl:
+            frecvente[lit] = frecvente.get(lit, 0) + 1
+    # agregam pe variabila (abs)
+    scor = {}
+    for lit, cnt in frecvente.items():
+        var = abs(lit)
+        scor[var] = scor.get(var, 0) + cnt
+    # alegem variabila cu scor maxim
+    return max(scor, key=lambda v: scor[v])
+
+
 @timp_si_memorie
-def dp(clauze: Set[FrozenSet[int]]) -> bool:
-    # Transformam intrarea intr-un set mutabil de clauze
-    clz: Set[FrozenSet[int]] = set(clauze)
+def dp(clauze_initiale: Set[FrozenSet[int]]) -> bool:
+    # pornim cu o copie mutabila a clauzelor
+    clauze_mod = set(clauze_initiale)
 
-    # Repetam pana cand formula e complet simplificata sau gasim o clauza goala
-    while True:
-        # Daca nu mai avem clauze, inseamna ca toti literalii pot fi satisfacuti
-        if not clz:
-            return True
+    # cazuri triviale
+    if not clauze_mod:
+        return True
+    if any(len(c) == 0 for c in clauze_mod):
+        return False
 
-        # Daca exista vreo clauza goala (0 literali), inseamna ca e contradictie
-        if any(len(c) == 0 for c in clz):
+    # continuam pana nu mai raman clauze de procesat
+    while clauze_mod:
+        # verificam din nou pentru clauza goala
+        if any(len(c) == 0 for c in clauze_mod):
             return False
 
-        # Propagare unitati: gasim clauza cu un singur literal
-        unit = next(
-            (next(iter(c)) for c in clz if len(c) == 1),
-            None
-        )
+        # propagarea unitati: gasim clauza cu un singur literal
+        unit = next((next(iter(c)) for c in clauze_mod if len(c) == 1), None)
         if unit is not None:
-            # Eliminam toate clauzele in care apare literalul adevarat
-            # si din rest scoatem literalul opus
-            clz = {
+            # eliminam clauzele care contin literalul adevarat
+            # si scoatem literalul opus din restul
+            clauze_mod = {
                 frozenset(c2 - {-unit})
-                for c2 in clz
+                for c2 in clauze_mod
                 if unit not in c2
             }
-            continue  # reluam cu formula redusa
+            continue
 
-        # Eliminarea literalilor puri: literali care apar doar cu semnul lor
-        lit = {l for c in clz for l in c}
-        pur = next((l for l in lit if -l not in lit), None)
+        # eliminarea literalului pur: literali care apar doar cu un semn
+        literali = {l for c in clauze_mod for l in c}
+        pur = next((l for l in literali if -l not in literali), None)
         if pur is not None:
-            # Scoatem toate clauzele in care apare acest literal pur
-            clz = {c for c in clz if pur not in c}
-            continue  # reluam cu formula redusa
+            # scoatem toate clauzele in care apare literalul pur
+            clauze_mod = {c for c in clauze_mod if pur not in c}
+            continue
 
-        # Nu mai putem simplifica direct, aplicam pasul de rezolutie
-        #    alegem un literal oricare din prima clauza
-        lit = next(iter(next(iter(clz))))
-        var = abs(lit)
+        # alegem o variabila in functie de frecventa
+        variabila = alege_variabila(clauze_mod)
 
-        # Impartim clauzele in cele care contin lit si cele care contin -lit
-        poz = [c for c in clz if lit in c]
-        neg = [c for c in clz if -lit in c]
+        # impartim clauzele dupa prezenta variabilei
+        pozitive  = [c for c in clauze_mod if  variabila in c]
+        negative  = [c for c in clauze_mod if -variabila in c]
 
-        # Generam toti rezolventi dintre cele doua grupe
-        temp_rez = {
-            frozenset((c1 - {lit}) | (c2 - {-lit}))
-            for c1 in poz for c2 in neg
-        }
-        # Filtram rezolventi care sunt contradictori intern (lit si -lit)
-        rezolventi = {r for r in temp_rez if not any(-l in r for l in r)}
+        # generam rezolventii pentru variabila
+        rezolventi = set()
+        for c1 in pozitive:
+            for c2 in negative:
+                r = (set(c1) - { variabila }) | (set(c2) - {-variabila})
+                # sarim rezolventii tautologici
+                if any(l in r and -l in r for l in r):
+                    continue
+                rezolventi.add(frozenset(r))
 
-        # Clauzele care nu implica variabila curenta raman
-        rest = {
-            c for c in clz
-            if var not in {abs(x) for x in c}
-        }
+        # pastram clauzele care nu mentioneaza variabila deloc
+        rest = {c for c in clauze_mod if variabila not in {abs(l) for l in c}}
 
-        # Noua formula e unirea dintre clauzele ramase si rezolventi calcultati
-        clz = rest | rezolventi
-        # reluam din nou procesul pe formula redusa
+        # construim noul set de clauze
+        clauze_nou = rest | rezolventi
+
+        # eliminare clauze inutile:
+        # scoatem clauzele care contin toti literali altei clauze
+        clauze_reduse = set(clauze_nou)
+        for c1 in clauze_nou:
+            for c2 in clauze_nou:
+                if c1 is not c2 and c1.issubset(c2):
+                    clauze_reduse.discard(c2)
+
+        clauze_mod = clauze_reduse
+
+        # daca nu mai avem clauze, e satisfiabila
+        if not clauze_mod:
+            return True
+
+    # daca iesim din bucla, nu avem contraditie - SAT
+    return True

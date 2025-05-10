@@ -1,56 +1,71 @@
 from typing import Dict, Set, FrozenSet, Optional
 import re
 import os
+import io
 
-def dimacs(path: str) -> Dict[str, Set[FrozenSet[int]]]:
+def _proceseaza_dimacs_linii(linii) -> Dict[str, Set[FrozenSet[int]]]:
     """
-    Citeste un fisier DIMACS FNC care poate contine una sau mai multe formule.
-    - Liniile care incep cu 'c formula:' definesc inceputul unei noi formule, cu numele dupa ':'.
-    - Daca nu exista astfel de comentarii, tot fisierul e considerat o singura formula,
-      denumita dupa numele fisierului.
-    - Liniile de profil 'p cnf num_vars num_clauses' se ignora, ele doar marcheaza
-      inceputul unei sectiuni de clauze.
-    - Fiecare linie de clauza este o lista de literali (intregi), terminata cu 0.
-    Returneaza un dict:
-       { nume_formula: set(frozenset(literali)) }
+    Proceseaza un iterator de lini în format DIMACS
+    - Liniile care incep cu 'c formula:' definesc inceputul unei noi formule
+    - Orice alta linie care incepe cu 'c' este comentariu si se sare
+    - 'p cnf …' marcheaza doar sectiunea de clauze
+    - Clauzele sunt lini de literali intregi, terminate cu 0.
     """
-    formula: Dict[str, Set[FrozenSet[int]]] = {}
+    formule: Dict[Optional[str], Set[FrozenSet[int]]] = {}
     curent: Optional[str] = None
 
-    with open(path, 'r') as f:
-        for raw in f:
-            linie = raw.strip()
-            if not linie:
-                # linie goala - separator de blocuri
-                continue
+    for linie_bruta in linii:
+        linie = linie_bruta.strip()
+        if not linie:
+            continue  # separam blocurile printr-o linie goala
 
-            # Comentariu special de forma "c formula: nume"
-            if linie.startswith('c formula:'):
-                curent = linie.split(':', 1)[1].strip()
-                formula[curent] = set()
-                continue
+        # daca intalnim '%' sau linia '0', incheiem analiza
+        if linie.startswith('%') or linie == '0':
+            break
 
-            # Linia de profil DIMACS
-            if linie.startswith('p cnf'):
-                # daca nu avem un nume curent, il setam dupa numele fisierului
-                if curent is None:
-                    nume = os.path.basename(path)
-                    formula[nume] = set()
-                    curent = nume
-                continue
+        # comentariu special pentru inceputul unei formule
+        if linie.startswith('c formula:'):
+            curent = linie.split(':', 1)[1].strip()
+            formule[curent] = set()
+            continue
 
-            # Daca nu avem inca o formula curenta, o initializam cu numele fisierului
+        # orice alta linie care incepe cu 'c' - comentariu, se sare
+        if linie.startswith('c'):
+            continue
+
+        # linia de profil DIMACS
+        if linie.startswith('p cnf'):
             if curent is None:
-                nume = os.path.basename(path)
-                formula[nume] = set()
-                curent = nume
+                nume_generic = os.path.basename("<batch>")
+                formule[nume_generic] = set()
+                curent = nume_generic
+            continue
 
-            # Procesam linia de clauza: literali separati prin spatiu, terminata cu 0
-            parts = re.split(r"\s+", linie)
-            nums = [int(x) for x in parts if x]
-            if nums[-1] != 0:
-                raise ValueError(f"Linie invalida in {path}: '{linie}'. Trebuie sa se termine cu 0.")
-            literali = frozenset(nums[:-1])
-            formula[curent].add(literali)
+        # daca nu avem nicio formula deschisa, initializam una
+        if curent is None:
+            nume_generic = os.path.basename("<batch>")
+            formule[nume_generic] = set()
+            curent = nume_generic
 
-    return formula
+        # linie de clauza: literali separati prin spatiu, terminata cu 0
+        parti = re.split(r"\s+", linie)
+        numere = [int(x) for x in parti if x]
+        if not numere or numere[-1] != 0:
+            raise ValueError(f"Linie invalida: '{linie}'. Trebuie sa se termine cu 0.")
+        literali = frozenset(numere[:-1])
+        formule[curent].add(literali)
+
+    return formule
+
+def dimacs_file(cale: str) -> Dict[str, Set[FrozenSet[int]]]:
+    """
+    Proceseaza un fișier DIMACS
+    """
+    with open(cale, 'r', encoding='utf-8') as f:
+        return _proceseaza_dimacs_linii(f)
+
+def dimacs_text(text: str) -> Dict[str, Set[FrozenSet[int]]]:
+    """
+    Proceseaza un sir care contine un intreg fisier DIMACS
+    """
+    return _proceseaza_dimacs_linii(io.StringIO(text))

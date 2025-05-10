@@ -95,14 +95,10 @@ După alegerea modului de input, vei selecta solver-ul:
    ↳ [CACM Archive](https://dl.acm.org/doi/10.1145/367273.367279) / [Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm)  
 3. **Cook, S. A.** (1971). *The Complexity of Theorem‐Proving Procedures*. STOC ’71.  
    ↳ [ACM DL](https://dl.acm.org/doi/10.1145/800157.805047) / [Wikipedia](https://en.wikipedia.org/wiki/Cook–Levin_theorem)  
-4. **Biere, A., Heule, M., van Maaren, H. & Walsh, T.** (eds.) (2009). *Handbook of Satisfiability*.  
-   ↳ [IOS Press](https://www.iospress.nl/book/handbook-of-satisfiability/)  
 5. **DIMACS CNF Challenge** – formate & benchmark-uri  
-   ↳ [SATLIB @ UBC](https://www.cs.ubc.ca/~hoos/SATLIB/Benchmarks/SAT/)  
+   ↳ [SATLIB @ UBC]((https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html))  
 6. **SAT Competition** – competiții anuale  
    ↳ [satcompetition.org](http://satcompetition.org/) 
-
-
 
 
    

@@ -92,12 +92,10 @@ După alegerea modului de input, vei selecta solver-ul:
 1. **Davis, M. & Putnam, H.** (1960). *A Computing Procedure for Quantification Theory*.  
    ↳ [ACM DL](https://dl.acm.org/doi/10.1145/367177.367199) / [Wikipedia](https://en.wikipedia.org/wiki/Davis–Putnam_algorithm)  
 2. **Davis, M., Logemann, G. & Loveland, D.** (1962). *A Machine Program for Theorem‐Proving*.  
-   ↳ [CACM Archive](https://dl.acm.org/doi/10.1145/367273.367279) / [Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm)  
-3. **Cook, S. A.** (1971). *The Complexity of Theorem‐Proving Procedures*. STOC ’71.  
-   ↳ [ACM DL](https://dl.acm.org/doi/10.1145/800157.805047) / [Wikipedia](https://en.wikipedia.org/wiki/Cook–Levin_theorem)  
-5. **DIMACS CNF Challenge** – formate & benchmark-uri  
+   ↳ [ACM DL](https://dl.acm.org/doi/10.1145/367273.367279) / [Wikipedia](https://en.wikipedia.org/wiki/DPLL_algorithm)   
+3. **DIMACS CNF Challenge** – formate & benchmark-uri  
    ↳ [SATLIB @ UBC](https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html)  
-6. **SAT Competition** – competiții anuale  
+4. **SAT Competition** – competiții anuale  
    ↳ [satcompetition.org](http://satcompetition.org/) 
 
 

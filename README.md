@@ -1,6 +1,6 @@
 # FNC-Solver
 
-Un mic proiect in Python pentru rezolvarea problemelor SAT în formă CNF, cu trei metode de bază:
+Un mic proiect in Python pentru rezolvarea problemelor SAT în formă FNC, cu trei metode de bază:
 
 - **Rezoluţie completă**  
 - **DP (Davis–Putnam)**  
@@ -17,12 +17,11 @@ Oferă:
 ## 📁 Structura proiect
 FNC-Solver/  
 ├── main.py # CLI + meniu interactiv & batch  
-├── fnc.py # parsare format DIMACS (batch sau text)  
-├── rezolutie.py # solver Rezoluţie completă  
+├── fnc.py # procesarea format DIMACS (batch sau text)  
+├── rezolutie.py # solver Rezoluţie    
 ├── dp.py # solver Davis–Putnam  
 ├── dpll.py # solver DPLL  
-├── masurare_performanta.py # decorator de măsurare timp și memorie  
-├── requirements.txt # (opțional) niciun pachet extern  
+├── masurare_performanta.py # decorator de măsurare timp și memorie   
 └── README.md # (acest fișier)  
 
 ---

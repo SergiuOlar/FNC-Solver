@@ -24,7 +24,7 @@ def dpll(clauze: Set[FrozenSet[int]]) -> bool:
         if any(len(c) == 0 for c in clz):
             return False
 
-        # 1) Cautam clauze unitare (exact un literal)
+        # Cautam clauze unitare (exact un literal)
         for c in clz:
             if len(c) == 1:
                 l = next(iter(c))  # literalul din clauza unitară
@@ -37,7 +37,7 @@ def dpll(clauze: Set[FrozenSet[int]]) -> bool:
                 )
                 return rec(new_clz)  # reluam cu formula redusa
 
-        # 2) Cautam literali puri (apare l, dar nu apare -l)
+        # Cautam literali puri (apare l, dar nu apare -l)
         lit = {l for c in clz for l in c}
         for l in lit:
             if -l not in lit:
@@ -45,8 +45,8 @@ def dpll(clauze: Set[FrozenSet[int]]) -> bool:
                 new_clz = frozenset(c for c in clz if l not in c)
                 return rec(new_clz)  # reluam dupa eliminare
 
-        # 3) Daca niciun pas simplu nu a rezolvat tot,
-        #    alegem un literal oricare
+        # Daca niciun pas simplu nu a rezolvat tot,
+        # alegem un literal oricare
         lit = next(iter(next(iter(clz))))
 
         # Incercam mai intai sa-l punem adevarat

@@ -15,7 +15,7 @@ Oferă:
 ---
 
 ## 📁 Structura proiect
-FNC-Solver/
+FNC-Solver/  
 ├── main.py # CLI + meniu interactiv & batch  
 ├── fnc.py # parsare format DIMACS (batch sau text)  
 ├── rezolutie.py # solver Rezoluţie completă  
@@ -32,7 +32,7 @@ FNC-Solver/
 1. Clonează proiectul:  
    -**git clone** https://github.com/SergiuOlar/FNC-Solver.git  
    -**cd FNC-Solver**  
-2. Asigura-te ca ai Python 3.7+:  
+2. Asigura-te ca ai Python 3.+:  
    -**python --version**  
 3.Pornește interfața:  
    -**python main.py**  
@@ -60,21 +60,30 @@ La pornire vei vedea:
 ## 🔢 Selectarea solver-elor  
 
 După alegerea modului de input, vei selecta solver-ul:  
-  -**1) Rezoluție   2) DP   3) DPLL   4) Toate**  
+  **1) Rezoluție   2) DP   3) DPLL   4) Toate**  
 
 ---
 
-## 🔍 Formate acceptate  
+## 📄 Format DIMACS FNC
+
+  c formula: NumeInstanta      # (opțional) etichetează o formulă  
+  p cnf <numVar> <numClauze>   # header (ignorăm cifrele)  
+  <lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0  
+  …                            # mai multe clauze  
+
+  Comentariile c … sunt ignorate (doar c formula: desemnează nume)
+  Orice altă linie care începe cu c este sărită.
+  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.
+  Fiecare clauză listează literali (pozitiv/negativ) și se termină cu 0.  
+
+  **Exemplu**
+  
   c formula: ex1  
   p cnf 4 3  
   1 -3 4 0  
   -1 2 3 0  
   2 -4 0  
-
-  **Comentariile cu c formula: pot delimita sub-formule multiple.  
-  Orice altă linie care începe cu c este sărită.  
-  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.  
-  Fiecare clauză: lista de literali (întregi), termină cu 0.**  
+  
 
 ---
 

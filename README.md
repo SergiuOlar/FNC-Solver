@@ -8,7 +8,7 @@ Un mic CLI Python pentru rezolvarea problemelor SAT în formă CNF, cu trei meto
 
 Oferă:
 - **Mod interactiv** (citire de la tastatură + live pe ecran)  
-- **Mod batch** (citire din fișier DIMACS / `.cnf` / `.txt` + scriere rezultate în fișier)  
+- **Mod batch** (citire din fișier .`dimacs` / `.cnf` / `.txt` + scriere rezultate în fișier)  
 - **Suport arhive** (`.tar.gz` cu mai multe `.cnf`/`.dimacs`)  
 - Monitorizare **timp** și **memorie** pentru fiecare apel
 
@@ -16,14 +16,14 @@ Oferă:
 
 ## 📁 Structura proiect
 FNC-Solver/
-├── main.py # CLI + meniu interactiv & batch
-├── fnc.py # parsare format DIMACS (batch sau text)
-├── rezolutie.py # solver Rezoluţie completă
-├── dp.py # solver Davis–Putnam
-├── dpll.py # solver DPLL
-├── masurare_performanta.py # decorator de măsurare timp și memorie
-├── requirements.txt # (opțional) niciun pachet extern
-└── README.md # (acest fișier)
+- ├── main.py # CLI + meniu interactiv & batch
+- ├── fnc.py # parsare format DIMACS (batch sau text)
+- ├── rezolutie.py # solver Rezoluţie completă
+- ├── dp.py # solver Davis–Putnam
+- ├── dpll.py # solver DPLL
+- ├── masurare_performanta.py # decorator de măsurare timp și memorie
+- ├── requirements.txt # (opțional) niciun pachet extern
+- └── README.md # (acest fișier)
 
 ---
 

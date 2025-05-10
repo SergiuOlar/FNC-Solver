@@ -96,7 +96,7 @@ După alegerea modului de input, vei selecta solver-ul:
 3. **Cook, S. A.** (1971). *The Complexity of Theorem‐Proving Procedures*. STOC ’71.  
    ↳ [ACM DL](https://dl.acm.org/doi/10.1145/800157.805047) / [Wikipedia](https://en.wikipedia.org/wiki/Cook–Levin_theorem)  
 5. **DIMACS CNF Challenge** – formate & benchmark-uri  
-   ↳ [SATLIB @ UBC]((https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html))  
+   ↳ [SATLIB @ UBC](https://www.cs.ubc.ca/~hoos/SATLIB/benchm.html)  
 6. **SAT Competition** – competiții anuale  
    ↳ [satcompetition.org](http://satcompetition.org/) 
 

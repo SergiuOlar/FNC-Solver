@@ -16,65 +16,65 @@ Oferă:
 
 ## 📁 Structura proiect
 FNC-Solver/
-- ├── main.py # CLI + meniu interactiv & batch
-- ├── fnc.py # parsare format DIMACS (batch sau text)
-- ├── rezolutie.py # solver Rezoluţie completă
-- ├── dp.py # solver Davis–Putnam
-- ├── dpll.py # solver DPLL
-- ├── masurare_performanta.py # decorator de măsurare timp și memorie
-- ├── requirements.txt # (opțional) niciun pachet extern
-- └── README.md # (acest fișier)
+├── main.py # CLI + meniu interactiv & batch  
+├── fnc.py # parsare format DIMACS (batch sau text)  
+├── rezolutie.py # solver Rezoluţie completă  
+├── dp.py # solver Davis–Putnam  
+├── dpll.py # solver DPLL  
+├── masurare_performanta.py # decorator de măsurare timp și memorie  
+├── requirements.txt # (opțional) niciun pachet extern  
+└── README.md # (acest fișier)  
 
 ---
 
 ## 🚀 Cum se rulează
 
-1. Clonează proiectul:
-   -**git clone** https://github.com/SergiuOlar/FNC-Solver.git
-   -**cd FNC-Solver**
-2. Asigura-te ca ai Python 3.7+:
-   -**python --version**
-3.Pornește interfața:
-   -**python main.py**
+1. Clonează proiectul:  
+   -**git clone** https://github.com/SergiuOlar/FNC-Solver.git  
+   -**cd FNC-Solver**  
+2. Asigura-te ca ai Python 3.7+:  
+   -**python --version**  
+3.Pornește interfața:  
+   -**python main.py**  
 
 ---
 
 ## 🎛️ Meniul principal
 
-La pornire vei vedea:
-  1) Fișier DIMACS      # input din .cnf/.dimacs/.txt → afișaj + scriere fișier
-     -**Alege un fișier .cnf, .dimacs sau .txt în format DIMACS FNC.**
-     -**Rezultatele vor fi afișate live și salvate într-un fișier .txt la calea specificată.**
-  3) Tastatură          # input manual → afișaj doar pe ecran
-     -**Introdu clauzele linie cu linie: lista de literali (ex: 1 -3 4 0), termină cu 0.**
-     -**O linie goală finalizează input-ul.**
-     -**Se afișează doar pe ecran.**
-  5) Arhivă .tar.gz     # batch din arhivă → afișaj + scriere fișier
-     -**Procesează toate fișierele .cnf/.dimacs din arhivă.**
-     -**Afișează live și salvează rezultatele într-un fișier .txt.**
-     -**Vei primi un mesaj de avertisment dacă alegi Rezoluție (ineficient pe loturi mari).**
-  7) Iesire             # închide programul
+La pornire vei vedea:  
+  1) Fișier DIMACS      # input din .cnf/.dimacs/.txt → afișaj + scriere fișier  
+     -**Alege un fișier .cnf, .dimacs sau .txt în format DIMACS FNC.**  
+     -**Rezultatele vor fi afișate live și salvate într-un fișier .txt la calea specificată.**  
+  3) Tastatură          # input manual → afișaj doar pe ecran  
+     -**Introdu clauzele linie cu linie: lista de literali (ex: 1 -3 4 0), termină cu 0.**  
+     -**O linie goală finalizează input-ul.**  
+     -**Se afișează doar pe ecran.**  
+  5) Arhivă .tar.gz     # batch din arhivă → afișaj + scriere fișier  
+     -**Procesează toate fișierele .cnf/.dimacs din arhivă.**  
+     -**Afișează live și salvează rezultatele într-un fișier .txt.**  
+     -**Vei primi un mesaj de avertisment dacă alegi Rezoluție (ineficient pe loturi mari).**  
+  7) Iesire             # închide programul  
 
 ---
 
-## 🔢 Selectarea solver-elor
+## 🔢 Selectarea solver-elor  
 
-După alegerea modului de input, vei selecta solver-ul:
-  -**1) Rezoluție   2) DP   3) DPLL   4) Toate**
+După alegerea modului de input, vei selecta solver-ul:  
+  -**1) Rezoluție   2) DP   3) DPLL   4) Toate**  
 
 ---
 
-🔍 Formate acceptate
-  c formula: ex1
-  p cnf 4 3
-  1 -3 4 0
-  -1 2 3 0
-  2 -4 0
+## 🔍 Formate acceptate  
+  c formula: ex1  
+  p cnf 4 3  
+  1 -3 4 0  
+  -1 2 3 0  
+  2 -4 0  
 
-  **Comentariile cu c formula: pot delimita sub-formule multiple.
-  Orice altă linie care începe cu c este sărită.
-  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.
-  Fiecare clauză: lista de literali (întregi), termină cu 0.**
+  **Comentariile cu c formula: pot delimita sub-formule multiple.  
+  Orice altă linie care începe cu c este sărită.  
+  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.  
+  Fiecare clauză: lista de literali (întregi), termină cu 0.**  
 
 ---
 

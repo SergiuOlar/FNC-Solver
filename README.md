@@ -42,18 +42,18 @@ FNC-Solver/
 ## 🎛️ Meniul principal
 
 La pornire vei vedea:  
-  1) Fișier DIMACS      # input din .cnf/.dimacs/.txt → afișaj + scriere fișier  
+  1) Fișier DIMACS      _# input din .cnf/.dimacs/.txt → afișaj + scriere fișier_  
      -**Alege un fișier .cnf, .dimacs sau .txt în format DIMACS FNC.**  
      -**Rezultatele vor fi afișate live și salvate într-un fișier .txt la calea specificată.**  
-  3) Tastatură          # input manual → afișaj doar pe ecran  
+  3) Tastatură          _# input manual → afișaj doar pe ecran_    
      -**Introdu clauzele linie cu linie: lista de literali (ex: 1 -3 4 0), termină cu 0.**  
      -**O linie goală finalizează input-ul.**  
      -**Se afișează doar pe ecran.**  
-  5) Arhivă .tar.gz     # batch din arhivă → afișaj + scriere fișier  
+  5) Arhivă .tar.gz     _# batch din arhivă → afișaj + scriere fișier_  
      -**Procesează toate fișierele .cnf/.dimacs din arhivă.**  
      -**Afișează live și salvează rezultatele într-un fișier .txt.**  
      -**Vei primi un mesaj de avertisment dacă alegi Rezoluție (ineficient pe loturi mari).**  
-  7) Iesire             # închide programul  
+  7) Iesire             _# închide programul_  
 
 ---
 
@@ -64,19 +64,19 @@ După alegerea modului de input, vei selecta solver-ul:
 
 ---
 
-## 📄 Format DIMACS FNC
+## 📄 Format DIMACS FNC  
 
   c formula: NumeInstanta      # (opțional) etichetează o formulă  
   p cnf <numVar> <numClauze>   # header (ignorăm cifrele)  
   <lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0  
   …                            # mai multe clauze  
 
-  Comentariile c … sunt ignorate (doar c formula: desemnează nume)
-  Orice altă linie care începe cu c este sărită.
-  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.
+  Comentariile c … sunt ignorate (doar c formula: desemnează nume)  
+  Orice altă linie care începe cu c este sărită.  
+  Linia p cnf <nr_var> <nr_cla> doar marchează secțiunea de clauze.  
   Fiecare clauză listează literali (pozitiv/negativ) și se termină cu 0.  
 
-  **Exemplu**
+  **Exemplu**  
   
   c formula: ex1  
   p cnf 4 3  

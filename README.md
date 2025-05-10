@@ -66,9 +66,9 @@ După alegerea modului de input, vei selecta solver-ul:
 ## 📄 Format DIMACS FNC  
 
   `-c formula: NumeInstanta      # (opțional) etichetează o formulă`   
-  `-p cnf <numVar> <numClauze>   # header (ignorăm cifrele)`  
-  `-<lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0`  
-  `-…                            # mai multe clauze`  
+  `-p cnf <numVar> <numClauze>   # header (ignorăm cifrele)        `  
+  `-<lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0  `  
+  `-…                            # mai multe clauze                `  
 
   Comentariile c … sunt ignorate (doar c formula: desemnează nume)  
   Orice altă linie care începe cu c este sărită.  

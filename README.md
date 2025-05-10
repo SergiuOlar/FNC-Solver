@@ -1,6 +1,6 @@
 # FNC-Solver
 
-Un mic CLI Python pentru rezolvarea problemelor SAT în formă CNF, cu trei metode de bază:
+Un mic proiect in Python pentru rezolvarea problemelor SAT în formă CNF, cu trei metode de bază:
 
 - **Rezoluţie completă**  
 - **DP (Davis–Putnam)**  
@@ -66,10 +66,10 @@ După alegerea modului de input, vei selecta solver-ul:
 
 ## 📄 Format DIMACS FNC  
 
-  c formula: NumeInstanta      # (opțional) etichetează o formulă  
-  p cnf <numVar> <numClauze>   # header (ignorăm cifrele)  
-  <lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0  
-  …                            # mai multe clauze  
+  -c formula: NumeInstanta      # (opțional) etichetează o formulă  
+  -p cnf <numVar> <numClauze>   # header (ignorăm cifrele)  
+  -<lit1> <lit2> … <litk> 0     # fiecare clauză, încheiată cu 0  
+  -…                            # mai multe clauze  
 
   Comentariile c … sunt ignorate (doar c formula: desemnează nume)  
   Orice altă linie care începe cu c este sărită.  

@@ -22,7 +22,7 @@ FNC-Solver/
 ├── dp.py # solver Davis–Putnam  
 ├── dpll.py # solver DPLL  
 ├── masurare_performanta.py # decorator de măsurare timp și memorie  
-├── intrare.txt # fisier cu date de intrare pentru test
+├── intrare.txt # fisier cu date de intrare pentru test  
 └── README.md # (acest fișier)  
 
 ---
